@@ -77,6 +77,14 @@ public class LevelConverter {
                                     boolean changed = true;
 
                                     switch (id) {
+                                        case 96:
+                                            if (chunk.getBlockData(x, y, z) == 96) {
+                                                chunk.setBlockId(x, y, z, 0);
+                                            }
+                                        case 167:
+                                            if (chunk.getBlockData(x, y, z) == 167) {
+                                                chunk.setBlockId(x, y, z, 0);
+                                            }
                                         case 3:
                                             if (chunk.getBlockData(x, y, z) == 2) {
                                                 chunk.setBlockId(x, y, z, Item.PODZOL);
