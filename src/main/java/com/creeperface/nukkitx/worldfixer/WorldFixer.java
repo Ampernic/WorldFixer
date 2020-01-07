@@ -44,13 +44,13 @@ public class WorldFixer extends PluginBase implements Listener {
             Level level = null;
 
             if (args.length >= 2) {
-                getServer().loadLevel(args[1]);
+                getServer().loadLevel(args[1]); //загрузить мир
 
-                level = getServer().getLevelByName(args[1]);
+                level = getServer().getLevelByName(args[1]); //сохранение имени мира
 
                 if (level == null) {
                     sender.sendMessage(TextFormat.RED + "Level " + TextFormat.YELLOW + args[1] + TextFormat.RED + " doesn't exist");
-                    return true;
+                    return true;  //мир не существует!
                 }
             }
 
@@ -58,28 +58,28 @@ public class WorldFixer extends PluginBase implements Listener {
                 case "fix":
                     if (!sender.hasPermission("wf.command.fix") && !sender.isOp()) {
                         sender.sendMessage(cmd.getPermissionMessage());
-                        return false;
+                        return false; //нет прав
                     }
 
                     if (!isPosSet((Player) sender)) {
                         sender.sendMessage(TextFormat.RED + "You must select both positions first!");
-                        return false;
+                        return false; //нет выделения
                     }
 
                     Selection selection = selectors.get(sender.getName().toLowerCase());
-                    Position pos1 = selection.pos1;
+                    Position pos1 = selection.pos1; //выделение
                     Position pos2 = selection.pos2;
 
                     if (pos1.level != pos2.level) {
                         sender.sendMessage(TextFormat.RED + "Both positions must be in the same level!");
-                        return false;
+                        return false;  //позиции в разных мирах
                     }
 
                     fix(selection);
 
                     selectors.remove(sender.getName().toLowerCase());
                     sender.sendMessage(TextFormat.GREEN + "Selected area has been successfully fixed!");
-                    break;
+                    break; //Успех!
                 case "fixlevel":
                     if (!sender.hasPermission("wf.command.fix") && !sender.isOp()) {
                         sender.sendMessage(cmd.getPermissionMessage());
